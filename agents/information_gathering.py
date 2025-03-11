@@ -1,20 +1,12 @@
-from tavily import TavilyClient
-from utils.utils import get_api_key
+from langchain.utilities import DuckDuckGoSearchAPIWrapper
+from langchain_community.tools import DuckDuckGoSearchResults
 import json
 
+
 def gather_information(user_input: str) -> str:
-    """Gathers and summarizes information from Tavily."""
-    tavily_api_key = get_api_key("tavily_api_key")
-    client = TavilyClient(api_key=tavily_api_key)
-    results = client.search(user_input)
-    if results and results.get('results'):
-      structured_results = []
-      for result in results['results']:
-        structured_results.append({
-            "title": result.get('title'),
-            "url": result.get('url'),
-            "content": result.get('content')
-        })
-      return json.dumps(structured_results, indent=2)
-    else:
-      return "No relevant information found."
+    """Gathers and summarizes information from DuckDuckGo using LangChain with custom formatting."""
+    search_wrapper = DuckDuckGoSearchAPIWrapper()
+    search_tool = DuckDuckGoSearchResults(api_wrapper=search_wrapper, output_format="json") #using json output format
+    results = search_tool.run(user_input)
+
+    return results
