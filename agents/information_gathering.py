@@ -3,9 +3,18 @@ from utils.utils import get_api_key
 import json
 
 def gather_information(user_input: str) -> str:
-    """Gathers information from Tavily and returns raw results."""
+    """Gathers and summarizes information from Tavily."""
     tavily_api_key = get_api_key("tavily_api_key")
     client = TavilyClient(api_key=tavily_api_key)
     results = client.search(user_input)
-
-    return json.dumps(results, indent=2) #or return results
+    if results and results.get('results'):
+      structured_results = []
+      for result in results['results']:
+        structured_results.append({
+            "title": result.get('title'),
+            "url": result.get('url'),
+            "content": result.get('content')
+        })
+      return json.dumps(structured_results, indent=2)
+    else:
+      return "No relevant information found."
