@@ -1,12 +1,8 @@
-import yaml
+import os
 
-def load_config(filepath="config/config.yaml"):
-    with open(filepath, "r") as file:
-        config = yaml.safe_load(file)
-
-    return config
-
-
-def get_api_key(key_name):
-    config = load_config()
-    return config.get(key_name)
+def get_api_key(api_key_name: str) -> str:
+    """Retrieves an API key from environment variables."""
+    api_key = os.environ.get(api_key_name)
+    if not api_key:
+        raise ValueError(f"API key '{api_key_name}' not found in environment variables.")
+    return api_key
