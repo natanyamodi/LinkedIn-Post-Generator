@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 def get_api_key(api_key_name: str) -> str:
