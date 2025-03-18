@@ -21,8 +21,4 @@ Sometimes, getting your thoughts onto LinkedIn can be tough. This tool helps you
 
 **Think of it as a simple way to create LinkedIn posts, whether you're celebrating a win or sharing your knowledge.**
 
-**Want to give it a shot?**
-
-* Try the demo here: [https://linkedin-post-generator-tutazygr8zdjvbyhrveagm.streamlit.app/](https://linkedin-post-generator-tutazygr8zdjvbyhrveagm.streamlit.app/)
-
 **Making LinkedIn posting easier!**
